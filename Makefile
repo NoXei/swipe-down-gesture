@@ -10,6 +10,7 @@ package: validate
 	gnome-extensions pack --force --out-dir=. \
 		--extra-source=gesture-adapter.js \
 		--extra-source=window-manager.js \
+		--extra-source=LICENSE \
 		--schema=schemas/org.gnome.shell.extensions.swipe-down-gesture.gschema.xml \
 		.
 

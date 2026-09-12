@@ -78,3 +78,7 @@ Create the installable archive:
 ```sh
 make package
 ```
+
+## License
+
+MIT
