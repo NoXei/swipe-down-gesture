@@ -33,8 +33,8 @@ Build and install the extension:
 
 ```sh
 make package
-gnome-extensions install --force swipe-down-gesture@taha.shell-extension.zip
-gnome-extensions enable swipe-down-gesture@taha
+gnome-extensions install --force swipe-down-gesture@NoXei.shell-extension.zip
+gnome-extensions enable swipe-down-gesture@NoXei
 ```
 
 Log out and back in after the first installation. GNOME Shell caches extension
@@ -46,7 +46,7 @@ changes reliably on Wayland.
 Open the settings window with:
 
 ```sh
-gnome-extensions prefs swipe-down-gesture@taha
+gnome-extensions prefs swipe-down-gesture@NoXei
 ```
 
 Available settings:

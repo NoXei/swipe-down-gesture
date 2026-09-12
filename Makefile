@@ -1,6 +1,6 @@
 .PHONY: validate package clean
 
-UUID := swipe-down-gesture@taha
+UUID := swipe-down-gesture@NoXei
 PACKAGE := $(UUID).shell-extension.zip
 
 validate:
