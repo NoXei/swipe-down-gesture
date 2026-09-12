@@ -1,0 +1,8 @@
+{
+    "uuid": "swipe-down-gesture@taha",
+    "name": "Swipe Down Gesture",
+    "description": "Minimize eligible windows on the active workspace with a three-finger swipe down.",
+    "version": 1,
+    "settings-schema": "org.gnome.shell.extensions.swipe-down-gesture",
+    "shell-version": ["50"]
+}
