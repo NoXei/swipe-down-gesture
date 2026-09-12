@@ -1,16 +1,13 @@
 # Swipe Down Gesture for GNOME
 
-A native-feeling GNOME Shell extension for clearing windows from your workspace
-with simple touchpad gestures. It uses Mutter's real minimize and restore APIs,
-so applications keep running and GNOME handles the animations.
+A tiny gnome extension. swipe down with 3 fingers to hide the window you're on,
+or use 4 fingers when you want everything gone. thats pretty much it.
 
-## I need a job
+## btw i need a job
 
-I built this extension because I enjoy turning small desktop frustrations into
-careful, native-feeling software. **I'm currently looking for a software
-engineering job.** If you like the project or know a team that could use someone
-who builds and debugs ideas like this, please reach out through my
-[GitHub profile](https://github.com/NoXei).
+made this because i wanted it and couldnt find it anywhere. if you're hiring
+someone who likes building/fixing little linux things, hi 👋
+[heres my github](https://github.com/NoXei)
 
 ## Gestures
 

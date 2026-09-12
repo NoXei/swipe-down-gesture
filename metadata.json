@@ -1,8 +1,8 @@
 {
     "uuid": "swipe-down-gesture@taha",
     "name": "Swipe Down Gesture",
-    "description": "Native GNOME touchpad gestures: three fingers hide the focused window, four hide them all. I need a job—I'm open to software engineering opportunities.",
-    "version": 3,
+    "description": "3 fingers hides one window, 4 hides everything. also i need a job lol (hire me?)",
+    "version": 4,
     "settings-schema": "org.gnome.shell.extensions.swipe-down-gesture",
     "shell-version": ["50"]
 }
