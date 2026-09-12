@@ -11,7 +11,7 @@ export default class SwipeDownGestureExtension extends Extension {
         this._windowManager = new WindowManager(this._settings);
         this._gesture = new GestureAdapter(
             this._settings,
-            () => this._windowManager.handleSwipeDown());
+            fingerCount => this._windowManager.handleSwipeDown(fingerCount));
 
         // The adapter also checks this mode for every gesture update. NORMAL
         // is a bit flag in Shell.ActionMode, not a standalone state value.

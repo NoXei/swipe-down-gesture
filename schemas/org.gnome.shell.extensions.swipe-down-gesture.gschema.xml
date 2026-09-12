@@ -4,22 +4,13 @@
           path="/org/gnome/shell/extensions/swipe-down-gesture/">
     <key name="enable-gesture" type="b">
       <default>true</default>
-      <summary>Enable the three-finger swipe gesture</summary>
-      <description>Observe a three-finger touchpad swipe down on the active workspace.</description>
-    </key>
-    <key name="selection-mode" type="s">
-      <default>'all'</default>
-      <choices>
-        <choice value="all"/>
-        <choice value="focused"/>
-      </choices>
-      <summary>Window selection mode</summary>
-      <description>Choose all eligible windows or only the focused window.</description>
+      <summary>Enable swipe-down gestures</summary>
+      <description>Use three fingers for the focused window or four fingers for all visible workspace windows.</description>
     </key>
     <key name="restore-on-second-swipe" type="b">
       <default>true</default>
-      <summary>Restore on a second swipe</summary>
-      <description>Restore the windows owned by the current workspace session.</description>
+      <summary>Restore from a clear desktop</summary>
+      <description>Restore the windows owned by the current workspace session when no eligible window is visible.</description>
     </key>
   </schema>
 </schemalist>

@@ -9,7 +9,8 @@ const GestureState = {
     IGNORED: 2,
 };
 
-const FINGER_COUNT = 3;
+const FOCUSED_FINGER_COUNT = 3;
+const ALL_FINGER_COUNT = 4;
 const DIRECTION_RATIO = 1.25;
 
 /**
@@ -25,6 +26,7 @@ export class GestureAdapter {
         this._totalX = 0;
         this._totalY = 0;
         this._qualified = false;
+        this._fingerCount = 0;
         this._filterId = 0;
         this._stageSignalId = 0;
         this._settingsSignalIds = [];
@@ -89,20 +91,22 @@ export class GestureAdapter {
         const phase = event.get_gesture_phase();
         if (phase === Clutter.TouchpadGesturePhase.BEGIN) {
             this._reset();
+            const fingerCount = event.get_touchpad_gesture_finger_count();
             if (!this._settings.get_boolean('enable-gesture') ||
-                event.get_touchpad_gesture_finger_count() !== FINGER_COUNT ||
+                ![FOCUSED_FINGER_COUNT, ALL_FINGER_COUNT].includes(fingerCount) ||
                 !this._isNormalDesktop()) {
                 this._state = GestureState.IGNORED;
                 return;
             }
 
+            this._fingerCount = fingerCount;
             this._state = GestureState.PENDING;
         }
 
         if (this._state !== GestureState.PENDING)
             return;
 
-        if (event.get_touchpad_gesture_finger_count() !== FINGER_COUNT ||
+        if (event.get_touchpad_gesture_finger_count() !== this._fingerCount ||
             !this._isNormalDesktop()) {
             this._cancel();
             return;
@@ -127,7 +131,7 @@ export class GestureAdapter {
         }
 
         // Deliberately no distance threshold: a completed, predominantly
-        // downward three-finger swipe is sufficient to perform the action.
+        // downward three- or four-finger swipe is sufficient for the action.
         this._qualified = this._totalY > 0 &&
             this._totalY > horizontal * DIRECTION_RATIO;
 
@@ -135,7 +139,7 @@ export class GestureAdapter {
         // only a complete, qualifying gesture is actionable.
         if (phase === Clutter.TouchpadGesturePhase.END) {
             if (this._qualified)
-                this._onSwipeDown();
+                this._onSwipeDown(this._fingerCount);
             this._reset();
         }
     }
@@ -145,6 +149,7 @@ export class GestureAdapter {
         this._totalX = 0;
         this._totalY = 0;
         this._qualified = false;
+        this._fingerCount = 0;
     }
 
     _reset() {
@@ -152,6 +157,7 @@ export class GestureAdapter {
         this._totalX = 0;
         this._totalY = 0;
         this._qualified = false;
+        this._fingerCount = 0;
     }
 
     destroy() {

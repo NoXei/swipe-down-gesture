@@ -1,6 +1,6 @@
 import Meta from 'gi://Meta';
 
-const ALL_WINDOWS = 'all';
+const ALL_FINGER_COUNT = 4;
 
 /**
  * Performs only native Meta.Window minimize/unminimize operations. Window
@@ -12,9 +12,13 @@ export class WindowManager {
         this._sessions = new Map();
     }
 
-    handleSwipeDown() {
+    handleSwipeDown(fingerCount) {
         const workspace = global.workspace_manager.get_active_workspace();
-        const candidates = this._eligibleWindows(workspace);
+        const visibleWindows = this._eligibleWindows(workspace);
+        const focused = global.display.focus_window;
+        const candidates = fingerCount === ALL_FINGER_COUNT
+            ? visibleWindows
+            : focused && visibleWindows.includes(focused) ? [focused] : [];
         let session = this._sessions.get(workspace);
 
         // A visible window always takes priority over restoring the session.
@@ -33,6 +37,11 @@ export class WindowManager {
             }
             return;
         }
+
+        // A three-finger swipe with no eligible focused window must not reveal
+        // hidden windows while another application is still visible.
+        if (visibleWindows.length > 0)
+            return;
 
         // Restore only when the desktop is already clear.
         if (session && this._settings.get_boolean('restore-on-second-swipe'))
@@ -68,12 +77,7 @@ export class WindowManager {
             return [];
         }
 
-        const eligible = windows.filter(window => this._isEligible(window, workspace));
-        if (this._settings.get_string('selection-mode') === ALL_WINDOWS)
-            return eligible;
-
-        const focused = global.display.focus_window;
-        return focused && eligible.includes(focused) ? [focused] : [];
+        return windows.filter(window => this._isEligible(window, workspace));
     }
 
     _isEligible(window, workspace) {
